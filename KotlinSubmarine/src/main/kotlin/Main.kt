@@ -6,7 +6,7 @@ fun main() {
     //Day05.run()
     Day06.Lanternfish().run()
     //Day07.run()
-    //Day08.run()
+    Day08.SevenSegmentSearch().run()
     //Day09.run()
     //Day10.run()
     //Day11.run()
