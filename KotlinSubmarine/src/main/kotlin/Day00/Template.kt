@@ -2,6 +2,10 @@ package Day00
 
 import Puzzle
 
+fun main() {
+    Template().run()
+}
+
 // https://adventofcode.com/2021/day/1
 class Template : Puzzle(1, "Funny Title!") {
     override val puzzleInput = "day01_input.txt"

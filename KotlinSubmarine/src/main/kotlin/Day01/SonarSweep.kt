@@ -3,6 +3,10 @@ package Day01
 import Puzzle
 import java.io.File
 
+fun main() {
+    SonarSweep().run()
+}
+
 // https://adventofcode.com/2021/day/1
 class SonarSweep : Puzzle(1, "Sonar Sweep") {
     override val label1 = "increases"

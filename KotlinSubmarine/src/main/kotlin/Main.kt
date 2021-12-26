@@ -1,6 +1,6 @@
-fun main(args: Array<String>) {
+fun main() {
     Day01.SonarSweep().run()
-    //Day02.Dive().run()
+    Day02.Dive().run()
     //Day03.run()
     //Day04.run()
     //Day05.run()

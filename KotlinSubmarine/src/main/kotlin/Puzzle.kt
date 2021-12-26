@@ -1,12 +1,12 @@
 // An abstract framework for running puzzles
 abstract class Puzzle(private val day: Int,
                       private val title: String) {
-    // Label identifying the puzzle output of part 1
-    abstract val label1: String
-    // Label identifying the puzzle output of part 2
-    abstract val label2: String
-    // Main puzzle input file ie. dayXX_input.txt
-    // Set to "" to skip puzzle input for now
+
+    abstract val label1: String // Label for puzzle output of part 1
+    abstract val label2: String // Label identifying the puzzle output of part 2
+
+    // Main puzzle input file eg. dayXX_input.txt
+    // Set to "" to skip puzzle input
     abstract val puzzleInput: String
     // One or more puzzle test files
     abstract val testInput: Array<String>
