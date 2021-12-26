@@ -66,7 +66,7 @@ abstract class Puzzle(private val day: Int,
 
     // Add the right path to an input filename
     private fun getPath(input: String): String {
-        return "inputs/$input"
+        return "../Inputs/$input"
     }
 
     // TODO: Snapshot visual state in order to create an animated visualization
