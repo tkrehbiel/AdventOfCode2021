@@ -28,9 +28,14 @@ abstract class Puzzle(private val day: Int,
     // Optional code to reset state between puzzles
     internal open fun reset() {}
 
+    // Optional code to run before part1() and part2()
+    // Can be used if a puzzle runs the same code to get both answers.
+    internal open fun common(input: String) {}
+
     // Run part 1 and part 2 with a given input file
     private fun parts(heading: String, input: String) {
         println(heading)
+        common(getPath(input))
         try {
             println("Part 1: ${part1(getPath(input))} ($label1)")
         }
@@ -63,8 +68,8 @@ abstract class Puzzle(private val day: Int,
     }
 
     // Run part 1 and return an answer
-    abstract fun part1(input: String): Long
+    internal abstract fun part1(input: String): Long
 
     // Run part 2 and return an answer
-    abstract fun part2(input: String): Long
+    internal abstract fun part2(input: String): Long
 }
