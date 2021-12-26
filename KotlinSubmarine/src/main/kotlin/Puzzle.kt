@@ -1,3 +1,5 @@
+import kotlin.system.measureTimeMillis
+
 // An abstract framework for running puzzles
 abstract class Puzzle(private val day: Int,
                       private val title: String) {
@@ -35,19 +37,30 @@ abstract class Puzzle(private val day: Int,
     // Run part 1 and part 2 with a given input file
     private fun parts(heading: String, input: String) {
         println(heading)
-        common(getPath(input))
-        try {
-            println("Part 1: ${part1(getPath(input))} ($label1)")
+        val elapsed = measureTimeMillis {
+            common(getPath(input))
+
+            try {
+                val n: Long
+                val m = measureTimeMillis {
+                    n = part1(getPath(input))
+                }
+                println("Part 1: $n ($label1) (${m}ms)")
+            } catch (e: NotImplementedError) {
+                println("Part 1 not implemented")
+            }
+
+            try {
+                val n: Long
+                val m = measureTimeMillis {
+                    n = part2(getPath(input))
+                }
+                println("Part 2: $n ($label2) (${m}ms)")
+            } catch (e: NotImplementedError) {
+                println("Part 2 not implemented")
+            }
         }
-        catch (e: NotImplementedError) {
-            println("Part 1 not implemented")
-        }
-        try {
-            println("Part 2: ${part2(getPath(input))} ($label2)")
-        }
-        catch (e: NotImplementedError) {
-            println("Part 2 not implemented")
-        }
+        println("Elapsed Runtime: ${elapsed}ms")
         println()
     }
 
