@@ -5,13 +5,14 @@ import (
 	"time"
 )
 
-// PuzzleRunner is the interface for a puzzle runner
+// PuzzleRunner is the required interface to use the puzzle framework
 type PuzzleRunner interface {
 	Common(input string)
 	Part1(input string) int
 	Part2(input string) int
 }
 
+// PuzzleConfig contains key information about a puzzle and how to run it
 type PuzzleConfig struct {
 	Puzzle      PuzzleRunner
 	Day         int
@@ -29,30 +30,33 @@ func Run(config PuzzleConfig) {
 	parts(config, config.PuzzleInput)
 }
 
+// parts runs both part 1 and part 2 of a puzzle in sequence with a given input file
 func parts(config PuzzleConfig, input string) {
 	fmt.Printf("Using %s\n", input)
 
 	start := time.Now()
 
+	// Run the common code first
 	config.Puzzle.Common(addPath(input))
 
-	part1(config, input)
-	part2(config, input)
+	// Then run part1 and part2 in sequence
+	part1(config.Puzzle, input)
+	part2(config.Puzzle, input)
 
 	elapsed := time.Now().Sub(start)
 	fmt.Printf("Runtime: %v\n", elapsed)
 }
 
-func part1(config PuzzleConfig, input string) {
+func part1(runner PuzzleRunner, input string) {
 	start := time.Now()
-	result1 := config.Puzzle.Part1(addPath(input))
+	result1 := runner.Part1(addPath(input))
 	elapsed := time.Now().Sub(start)
 	fmt.Printf("Part 1: %d (%v)\n", result1, elapsed)
 }
 
-func part2(config PuzzleConfig, input string) {
+func part2(runner PuzzleRunner, input string) {
 	start := time.Now()
-	result2 := config.Puzzle.Part2(addPath(input))
+	result2 := runner.Part2(addPath(input))
 	elapsed := time.Now().Sub(start)
 	fmt.Printf("Part 2: %d (%v)\n", result2, elapsed)
 }
