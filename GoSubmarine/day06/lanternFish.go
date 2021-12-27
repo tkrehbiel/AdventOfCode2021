@@ -9,12 +9,16 @@ import (
 )
 
 // https://adventofcode.com/2021/day/6
-// Lanternfish - This was the first puzzle I attempted in Advent of Code ever.
-// My first brute force solution naturally consumed too much memory for part 2, so I abandoned it.
-// I initially approached it much like a video game framework of entities.
-// I show it here only for the historical records.
-// Lesson learned: Expect part 2 to have to scale.
-// Eventually I went back and solved part 2 in Kotlin instead.
+// Lanternfish
+
+/*
+This was the first puzzle I attempted in Advent of Code ever.
+My first brute force solution naturally consumed too much memory for part 2,
+and I had to abandon it. I initially approached it much like a video game
+framework of entities. I show it here only for the historical records.
+Lesson learned: Expect part 2 to have to scale.
+Eventually I went back and solved part 2 in Kotlin instead.
+*/
 
 type fish struct {
 	timer int
@@ -35,11 +39,7 @@ type lanternFish struct {
 	spawned []fish
 }
 
-// Common runs before Part1 and Part2, and can be used
-// if the code for part 1 and 2 is the same.
-// This should initialize state in the puzzle struct,
-// as the same struct is used for both the test runs and the puzzle run.
-// It doesn't *have* to read the puzzle input here, but it can.
+// Common reads the puzzle input and builds the initial array of fish
 func (p *lanternFish) Common(input string) {
 	p.current = make([]fish, 0)
 
