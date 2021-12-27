@@ -10,4 +10,6 @@ cd ../day05
 go run .
 cd ../day06
 go run .
+cd ../day07
+go run .
 cd ..
