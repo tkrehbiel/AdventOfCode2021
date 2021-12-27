@@ -2,6 +2,7 @@ package common
 
 import (
 	"bufio"
+	"io/ioutil"
 	"os"
 )
 
@@ -27,4 +28,12 @@ func EnumerateLines(fileName string, process func(row int, s string)) {
 	if err := scanner.Err(); err != nil {
 		panic(err)
 	}
+}
+
+func ReadText(fileName string) string {
+	bytes, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		panic(err)
+	}
+	return string(bytes)
 }
