@@ -4,6 +4,8 @@ import (
 	"github.com/tkrehbiel/adventofcode2021/gosubmarine/common"
 )
 
+// https://adventofcode.com/2021/day/1
+
 func main() {
 	common.Run(common.PuzzleConfig{
 		Puzzle:      new(puzzle),
