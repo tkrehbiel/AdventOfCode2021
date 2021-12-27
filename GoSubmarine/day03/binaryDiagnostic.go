@@ -22,8 +22,8 @@ type puzzle struct {
 	numbers []string
 }
 
-// Prepare reads the puzzle input
-func (p *puzzle) Prepare(input string) {
+// Common reads the puzzle input
+func (p *puzzle) Common(input string) {
 	p.numbers = make([]string, 0)
 	common.EnumerateLines(input, func(row int, s string) {
 		if row == 0 {

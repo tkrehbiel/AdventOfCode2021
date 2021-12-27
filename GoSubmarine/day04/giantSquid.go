@@ -35,11 +35,8 @@ type board struct {
 	matches [5][5]bool
 }
 
-// Prepare gets ready for a puzzle run.
-// This should initialize state in the puzzle struct,
-// as it's used for both the test runs and the puzzle run.
-// It doesn't *have* to read the puzzle input here, but it can.
-func (p *puzzle) Prepare(input string) {
+// Common reads the input and gets ready to run the puzzle.
+func (p *puzzle) Common(input string) {
 	p.drawing = make([]int, 0)
 	p.boards = make([]board, 0)
 	p.readInput(input)

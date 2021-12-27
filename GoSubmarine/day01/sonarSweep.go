@@ -21,8 +21,8 @@ type puzzle struct {
 	numbers []int // puzzle input
 }
 
-// Prepare reads the puzzle input into an array of ints
-func (p *puzzle) Prepare(input string) {
+// Common reads the puzzle input into an array of ints
+func (p *puzzle) Common(input string) {
 	p.numbers = make([]int, 0)
 	common.EnumerateLines(input, func(row int, s string) {
 		i, err := strconv.Atoi(s)

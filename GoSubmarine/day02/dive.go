@@ -25,8 +25,8 @@ type puzzle struct {
 	aim            int
 }
 
-// Prepare reads the puzzle input
-func (p *puzzle) Prepare(input string) {
+// Common reads the puzzle input
+func (p *puzzle) Common(input string) {
 	p.position = 0
 	p.depth1 = 0
 	p.depth2 = 0

@@ -18,11 +18,12 @@ type puzzle struct {
 	lines int
 }
 
-// Prepare gets ready for a puzzle run.
+// Common runs before Part1 and Part2, and can be used
+// if the code for part 1 and 2 is the same.
 // This should initialize state in the puzzle struct,
-// as it's used for both the test runs and the puzzle run.
+// as the same struct is used for both the test runs and the puzzle run.
 // It doesn't *have* to read the puzzle input here, but it can.
-func (p *puzzle) Prepare(input string) {
+func (p *puzzle) Common(input string) {
 	p.lines = 0
 	common.EnumerateLines(input, func(row int, s string) {
 		p.lines++
