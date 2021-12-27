@@ -22,23 +22,23 @@ type puzzle struct {
 }
 
 // Prepare reads the puzzle input into an array of ints
-func (t *puzzle) Prepare(input string) {
-	t.numbers = make([]int, 0)
+func (p *puzzle) Prepare(input string) {
+	p.numbers = make([]int, 0)
 	common.EnumerateLines(input, func(row int, s string) {
 		i, err := strconv.Atoi(s)
 		if err != nil {
 			fmt.Printf("error converting string %s to int: %s\n", s, err)
 			panic(err)
 		}
-		t.numbers = append(t.numbers, i)
+		p.numbers = append(p.numbers, i)
 	})
-	fmt.Printf("read %d numbers\n", len(t.numbers))
+	fmt.Printf("read %d numbers\n", len(p.numbers))
 }
 
 // Part1 returns the number of increasing values
-func (t *puzzle) Part1(input string) (result int) {
+func (p *puzzle) Part1(input string) (result int) {
 	var lastValue int
-	for row, value := range t.numbers {
+	for row, value := range p.numbers {
 		if row > 0 && value > lastValue {
 			result++
 		}
@@ -48,10 +48,10 @@ func (t *puzzle) Part1(input string) (result int) {
 }
 
 // Part2 returns the number of increasing values in a 3-row sliding window
-func (t *puzzle) Part2(input string) (result int) {
+func (p *puzzle) Part2(input string) (result int) {
 	var lastValue int
-	for row := 0; row < len(t.numbers)-2; row++ {
-		value := t.numbers[row] + t.numbers[row+1] + t.numbers[row+2]
+	for row := 0; row < len(p.numbers)-2; row++ {
+		value := p.numbers[row] + p.numbers[row+1] + p.numbers[row+2]
 		if row > 0 && value > lastValue {
 			result++
 		}

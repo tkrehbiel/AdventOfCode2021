@@ -23,21 +23,21 @@ type puzzle struct {
 }
 
 // Prepare reads the puzzle input
-func (t *puzzle) Prepare(input string) {
-	t.numbers = make([]string, 0)
+func (p *puzzle) Prepare(input string) {
+	p.numbers = make([]string, 0)
 	common.EnumerateLines(input, func(row int, s string) {
 		if row == 0 {
-			t.width = len(s)
+			p.width = len(s)
 		}
-		t.numbers = append(t.numbers, s)
+		p.numbers = append(p.numbers, s)
 	})
 }
 
 // Part1 returns the first puzzle result
-func (t *puzzle) Part1(input string) (result int) {
+func (p *puzzle) Part1(input string) (result int) {
 	var gamma, epsilon int
-	for i := 0; i < t.width; i++ {
-		sums := countBitsAt(t.numbers, i)
+	for i := 0; i < p.width; i++ {
+		sums := countBitsAt(p.numbers, i)
 		bit := 0
 		if sums[1] > sums[0] {
 			bit = 1
@@ -49,22 +49,22 @@ func (t *puzzle) Part1(input string) (result int) {
 }
 
 // Part2 returns the second puzzle result
-func (t *puzzle) Part2(input string) (result int) {
+func (p *puzzle) Part2(input string) (result int) {
 	oxygens := make([]string, 0)
-	oxygens = append(oxygens, t.numbers...)
+	oxygens = append(oxygens, p.numbers...)
 
 	count := len(oxygens)
-	for i := 0; i < t.width && count > 1; i++ {
+	for i := 0; i < p.width && count > 1; i++ {
 		digit := mostCommonBit(countBitsAt(oxygens, i))
 		count = filter(oxygens, count, i, digit)
 	}
 	oxygen := decimal(remaining(oxygens))
 
 	co2s := make([]string, 0)
-	co2s = append(co2s, t.numbers...)
+	co2s = append(co2s, p.numbers...)
 
 	count = len(co2s)
-	for i := 0; i < t.width && count > 1; i++ {
+	for i := 0; i < p.width && count > 1; i++ {
 		digit := leastCommonBit(countBitsAt(co2s, i))
 		count = filter(co2s, count, i, digit)
 	}

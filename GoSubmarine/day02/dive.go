@@ -26,11 +26,11 @@ type puzzle struct {
 }
 
 // Prepare reads the puzzle input
-func (t *puzzle) Prepare(input string) {
-	t.position = 0
-	t.depth1 = 0
-	t.depth2 = 0
-	t.aim = 0
+func (p *puzzle) Prepare(input string) {
+	p.position = 0
+	p.depth1 = 0
+	p.depth2 = 0
+	p.aim = 0
 	common.EnumerateLines(input, func(row int, s string) {
 		// format errors are logged and the line skipped
 		if len(s) == 0 {
@@ -51,14 +51,14 @@ func (t *puzzle) Prepare(input string) {
 		}
 		switch strings.ToLower(fields[0]) {
 		case "forward":
-			t.position += value
-			t.depth2 += (t.aim * value)
+			p.position += value
+			p.depth2 += (p.aim * value)
 		case "down":
-			t.depth1 += value
-			t.aim += value
+			p.depth1 += value
+			p.aim += value
 		case "up":
-			t.depth1 -= value
-			t.aim -= value
+			p.depth1 -= value
+			p.aim -= value
 		default:
 			fmt.Printf("row %d: unrecognized command '%s'\n",
 				row+1, fields[0])
@@ -67,11 +67,11 @@ func (t *puzzle) Prepare(input string) {
 }
 
 // Part1 returns the first puzzle result
-func (t *puzzle) Part1(input string) (result int) {
-	return t.position * t.depth1
+func (p *puzzle) Part1(input string) (result int) {
+	return p.position * p.depth1
 }
 
 // Part2 returns the second puzzle result
-func (t *puzzle) Part2(input string) (result int) {
-	return t.position * t.depth2
+func (p *puzzle) Part2(input string) (result int) {
+	return p.position * p.depth2
 }
