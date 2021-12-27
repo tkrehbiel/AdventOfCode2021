@@ -27,7 +27,9 @@ func Run(config PuzzleConfig) {
 	for _, input := range config.TestInput {
 		parts(config, input)
 	}
-	parts(config, config.PuzzleInput)
+	if config.PuzzleInput != "" {
+		parts(config, config.PuzzleInput)
+	}
 }
 
 // parts runs both part 1 and part 2 of a puzzle in sequence with a given input file
