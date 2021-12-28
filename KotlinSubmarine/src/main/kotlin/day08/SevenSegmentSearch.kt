@@ -1,4 +1,4 @@
-package Day08
+package day08
 
 import Puzzle
 import java.io.File
