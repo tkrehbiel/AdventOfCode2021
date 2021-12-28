@@ -16,4 +16,6 @@ cd ../day08
 go run .
 cd ../day14
 go run .
+cd ../day15
+go run .
 cd ..
