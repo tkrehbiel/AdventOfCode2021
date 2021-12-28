@@ -4,7 +4,7 @@ import Puzzle
 import java.io.File
 
 fun main() {
-    Template().run()
+    Chiton().run()
 }
 
 // https://adventofcode.com/2021/day/15
@@ -15,7 +15,7 @@ I don't know if it would ever get the right answer on the real input.
 I re-wrote it from scratch in Golang using a Dijkstra shortest-path algorithm.
  */
 
-class Template : Puzzle(15, "Chiton") {
+class Chiton : Puzzle(15, "Chiton") {
     override val puzzleInput = "" //"day15_input.txt"
     override val testInput = arrayOf("day15_test1.txt", "day15_test2.txt")
     override val label1 = "lowest risk path"
