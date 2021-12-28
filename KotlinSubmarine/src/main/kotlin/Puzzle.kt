@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException
 import kotlin.system.measureTimeMillis
 
 // An abstract framework for running puzzles
@@ -38,26 +39,42 @@ abstract class Puzzle(private val day: Int,
     private fun parts(heading: String, input: String) {
         println(heading)
         val elapsed = measureTimeMillis {
-            common(getPath(input))
-
             try {
-                val n: Long
-                val m = measureTimeMillis {
-                    n = part1(getPath(input))
-                }
-                println("Part 1: $n ($label1) (${m}ms)")
-            } catch (e: NotImplementedError) {
-                println("Part 1 not implemented")
-            }
+                common(getPath(input))
 
-            try {
-                val n: Long
-                val m = measureTimeMillis {
-                    n = part2(getPath(input))
+                var missingInput = false
+                try {
+                    val n: Long
+                    val m = measureTimeMillis {
+                        n = part1(getPath(input))
+                    }
+                    println("Part 1: $n ($label1) (${m}ms)")
+                } catch (e: NotImplementedError) {
+                    println("Part 1 not implemented")
+                } catch (e: FileNotFoundException) {
+                    println("Part 1 input file missing")
+                    missingInput = true
                 }
-                println("Part 2: $n ($label2) (${m}ms)")
-            } catch (e: NotImplementedError) {
-                println("Part 2 not implemented")
+
+                try {
+                    if (missingInput) {
+                        println("Part 2 skipping")
+                    }
+                    else {
+                        val n: Long
+                        val m = measureTimeMillis {
+                            n = part2(getPath(input))
+                        }
+                        println("Part 2: $n ($label2) (${m}ms)")
+                    }
+                } catch (e: NotImplementedError) {
+                    println("Part 2 not implemented")
+                } catch (e: FileNotFoundException) {
+                    println("Part 2 input file missing")
+                }
+
+            } catch (e: FileNotFoundException) {
+                println("Input file missing")
             }
         }
         println("Elapsed Runtime: ${elapsed}ms")
