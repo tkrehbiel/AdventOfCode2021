@@ -12,7 +12,7 @@ fun main() {
     Day11.DumboOctopus().run()
     Day12.PassagePathing().run()
     Day13.TransparentOrigami().run()
-    //Day14.run()
+    day14.ExtendedPolymerization().run()
     //Day15.run()
     //Day16.run()
     //Day17.run()
