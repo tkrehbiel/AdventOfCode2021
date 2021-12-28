@@ -4,14 +4,14 @@ import kotlin.system.measureTimeMillis
 abstract class Puzzle(private val day: Int,
                       private val title: String) {
 
-    abstract val label1: String // Label for puzzle output of part 1
-    abstract val label2: String // Label identifying the puzzle output of part 2
+    internal abstract val label1: String // Label for puzzle output of part 1
+    internal abstract val label2: String // Label identifying the puzzle output of part 2
 
     // Main puzzle input file eg. dayXX_input.txt
     // Set to "" to skip puzzle input
-    abstract val puzzleInput: String
+    internal abstract val puzzleInput: String
     // One or more puzzle test files
-    abstract val testInput: Array<String>
+    internal abstract val testInput: Array<String>
 
     // Run puzzles with test input, then real input.
     fun run() {
@@ -84,5 +84,7 @@ abstract class Puzzle(private val day: Int,
     internal abstract fun part1(input: String): Long
 
     // Run part 2 and return an answer
+    // (Note: Puzzle implementations might assume that part1
+    // also ran and stored some state required for part2.)
     internal abstract fun part2(input: String): Long
 }
