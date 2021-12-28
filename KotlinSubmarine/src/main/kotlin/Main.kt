@@ -11,7 +11,7 @@ fun main() {
     Day10.SyntaxScoring().run()
     Day11.DumboOctopus().run()
     Day12.PassagePathing().run()
-    //Day13.run()
+    Day13.TransparentOrigami().run()
     //Day14.run()
     //Day15.run()
     //Day16.run()
