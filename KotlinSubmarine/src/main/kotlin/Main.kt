@@ -9,7 +9,7 @@ fun main() {
     Day08.SevenSegmentSearch().run()
     Day09.SmokeBasin().run()
     Day10.SyntaxScoring().run()
-    //Day11.run()
+    Day11.DumboOctopus().run()
     //Day12.run()
     //Day13.run()
     //Day14.run()
