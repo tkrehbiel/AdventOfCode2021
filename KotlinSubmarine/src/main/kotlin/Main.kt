@@ -10,7 +10,7 @@ fun main() {
     Day09.SmokeBasin().run()
     Day10.SyntaxScoring().run()
     Day11.DumboOctopus().run()
-    //Day12.run()
+    Day12.PassagePathing().run()
     //Day13.run()
     //Day14.run()
     //Day15.run()
