@@ -23,7 +23,7 @@ fun main() {
     //day17.TrickShot().run()
     //day18.Snailfish().run()
     //day19.run()
-    //day20.run()
+    //day20.TrenchMap().run()
     //day21.run()
     //day22.run()
     //day23.run()
