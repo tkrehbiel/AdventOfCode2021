@@ -20,8 +20,8 @@ fun main() {
     // Even though it worked fine for day01 - day14.
 
     //day16.PacketDecoder().run()
-    //day17.run()
-    //day18.run()
+    //day17.TrickShot().run()
+    //day18.Snailfish().run()
     //day19.run()
     //day20.run()
     //day21.run()
