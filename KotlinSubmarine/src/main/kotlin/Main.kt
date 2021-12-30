@@ -25,7 +25,7 @@ fun main() {
     //day19.run()
     //day20.TrenchMap().run()
     //day21.run()
-    //day22.run()
+    //day22.ReactorReboot().run()
     //day23.run()
     //day24.run()
     //day25.run()
