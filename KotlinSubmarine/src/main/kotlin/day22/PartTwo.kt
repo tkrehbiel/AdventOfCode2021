@@ -17,7 +17,7 @@ object PartTwo {
             else if (fields[0] == "off")
                 grid.clear(cube)
         }
-        return grid.countOn()
+        return grid.onCount()
     }
 
     data class Segment(var min: Int, var max: Int, var intersection: Boolean)
@@ -87,6 +87,71 @@ object PartTwo {
         return list
     }
 
+    // Grid maintains a list of cubes that are "on."
+    class Grid {
+        private val cuboidsOn = mutableListOf<Cube>()
+        private val removals = mutableListOf<Cube>()
+        private val additions = mutableListOf<Cube>()
+
+        fun onCount(): Long {
+            var count = 0L
+            for (p in cuboidsOn) {
+                count += p.count()
+            }
+            return count
+        }
+
+        // Update the lists after traversal
+        private fun cleanup() {
+            for (c in additions) {
+                cuboidsOn.add(c)
+            }
+            for (c in removals) {
+                cuboidsOn.remove(c)
+            }
+            removals.clear()
+            additions.clear()
+        }
+
+        // Enable a cube area.
+        // If the cube area intersects any previously-on cube,
+        // the cubes are subdivided such that the remaining
+        // cubes do not overlap.
+        fun set(setCube: Cube) {
+            for (existingCube in cuboidsOn) {
+                if (setCube.overlaps(existingCube)) {
+                    for (subCube in existingCube.intersect(setCube)) {
+                        if (!subCube.intersection)
+                            additions.add(subCube)
+                    }
+                    removals.add(existingCube)
+                }
+            }
+            cuboidsOn.add(setCube)
+            cleanup()
+        }
+
+        // Clear a cube area.
+        // This is accomplished by checking to see if the cleared cube area
+        // intersects any existing enabled cube areas. If so, the cubes are
+        // subdivided and the overlapping "cleared" area is removed from the list.
+        fun clear(clearCube: Cube) {
+            for (existingCube in this.cuboidsOn) {
+                if (clearCube.overlaps(existingCube)) {
+                    if (!clearCube.contains(existingCube)) {
+                        // Only sub-divide if the existing cube partially overlaps
+                        for (subCube in existingCube.intersect(clearCube)) {
+                            if (subCube.count() > 0 && !subCube.intersection)
+                                additions.add(subCube)
+                        }
+                    }
+                    removals.add(existingCube)
+                }
+            }
+            cleanup()
+        }
+    }
+
     // Just a 3D point or pixel but they call it a "cube"
     data class Point(var x: Int, var y: Int, var z: Int) {
         override fun toString(): String {
@@ -151,6 +216,7 @@ object PartTwo {
         }
 
         // Returns number of cubes in the cuboid (ie. w*h*d)
+        // Ie. the area of the cuboid.
         fun count(): Long {
             return width().toLong() * height().toLong() * depth().toLong()
         }
@@ -208,71 +274,6 @@ object PartTwo {
             result = 31 * result + max.hashCode()
             result = 31 * result + intersection.hashCode()
             return result
-        }
-    }
-
-    class Grid {
-        private val cuboidsOn = mutableListOf<Cube>()
-        private val removals = mutableListOf<Cube>()
-        private val additions = mutableListOf<Cube>()
-
-        fun countOn(): Long {
-            var count = 0L
-            for (p in cuboidsOn) {
-                //println("counting cuboid ${p}")
-                count += p.count()
-            }
-            return count
-        }
-
-        private fun cleanup() {
-            for (c in additions) {
-                cuboidsOn.add(c)
-            }
-            for (c in removals) {
-                cuboidsOn.remove(c)
-            }
-            removals.clear()
-            additions.clear()
-        }
-
-        fun set(setCube: Cube) {
-            //println("*** setting cube ${setCube}")
-            for (existingCube in cuboidsOn) {
-                if (setCube.overlaps(existingCube)) {
-                    //println("${setCube} overlaps with ${existingCube} by (${setCube.overlappingCount(existingCube)})")
-                    for (subCube in existingCube.intersect(setCube)) {
-                        //println("sub-cube is ${subCube} intersection ${subCube.intersection} (${subCube.count()})")
-                        if (!subCube.intersection)
-                            additions.add(subCube)
-                    }
-                    removals.add(existingCube)
-                }
-            }
-            cuboidsOn.add(setCube)
-            cleanup()
-        }
-
-        fun clear(clearCube: Cube) {
-            //println("*** clearing cube ${clearCube}")
-            for (existingCube in this.cuboidsOn) {
-                if (clearCube.overlaps(existingCube)) {
-                    //println("${clearCube} overlaps with existing ${existingCube} by (${clearCube.overlappingCount(existingCube)})")
-                    if (clearCube.contains(existingCube)) {
-                        //println("removing ${existingCube}")
-                    }
-                    else {
-                        // Only sub-divide if the existing cube partially overlaps
-                        for (subCube in existingCube.intersect(clearCube)) {
-                            //println("sub-cube is ${subCube} intersection ${subCube.intersection}")
-                            if (subCube.count() > 0 && !subCube.intersection)
-                                additions.add(subCube)
-                        }
-                    }
-                    removals.add(existingCube)
-                }
-            }
-            cleanup()
         }
     }
 }
